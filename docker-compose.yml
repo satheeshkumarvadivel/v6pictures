@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  v6pictures:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+      platforms:
+        - linux/amd64
+    image: v6pictures:latest
+    container_name: v6pictures
+    platform: linux/amd64
+    ports:
+      - "4000:80"
+    environment:
+      - NODE_ENV=production
+      - VITE_APP_NAME=V6Pictures
+      - VITE_APP_VERSION=1.0.0
+    networks:
+      - v6pictures-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.v6pictures.rule=Host(`localhost`)"
+      - "traefik.http.services.v6pictures.loadbalancer.server.port=80"
+
+networks:
+  v6pictures-network:
+    driver: bridge
+    name: v6pictures-network
+
+volumes:
+  v6pictures-data:
+    name: v6pictures-data

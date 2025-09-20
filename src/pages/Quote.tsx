@@ -19,6 +19,11 @@ interface Deliverable {
   unit: string;
 }
 
+interface Complementary {
+  complementaryName: string;
+  unit: string;
+}
+
 interface Invoice {
   invoiceNumber: string;
   customer: {
@@ -27,14 +32,17 @@ interface Invoice {
   address: string;
   phonenumber: string;
   noOfEvents: string;
-  eventDate: string;
-  customDateName: string;
-  customDate: string;
+  engagementDate: string;
+  seerDate: string;
   weddingDate: string;
   receptionDate: string;
+  customDate: string;
+  eventDate: string;
+  customDateName: string;
   remarks: string;
   events: Event[];
   deliverables: Deliverable[];
+  complementary: Complementary[];
   total: string;
   advance: string;
 }
@@ -125,17 +133,23 @@ const Quote = () => {
 
         <div className="text-white mr-8 min-w-[280px] whitespace-nowrap invoice-date-column flex-shrink-0 invoice-right-column">
           <p><strong>QUOTE DATE: </strong>{getTodaysDate()}</p>
-          {invoice.eventDate && (
-            <p><strong>EVENT DATE: </strong>{formatDate(invoice.eventDate)}</p>
+          {invoice.engagementDate && (
+            <p><strong>ENGAGEMENT DATE: </strong>{formatDate(invoice.engagementDate)}</p>
           )}
-          {invoice.customDate && (
-            <p><strong>{invoice.customDateName || 'CUSTOM DATE'}: </strong>{formatDate(invoice.customDate)}</p>
+          {invoice.seerDate && (
+            <p><strong>SEER DATE: </strong>{formatDate(invoice.seerDate)}</p>
           )}
           {invoice.weddingDate && (
             <p><strong>WEDDING DATE: </strong>{formatDate(invoice.weddingDate)}</p>
           )}
           {invoice.receptionDate && (
             <p><strong>RECEPTION DATE: </strong>{formatDate(invoice.receptionDate)}</p>
+          )}
+          {invoice.eventDate && (
+            <p><strong>EVENT DATE: </strong>{formatDate(invoice.eventDate)}</p>
+          )}
+          {invoice.customDate && (
+            <p><strong>{invoice.customDateName || 'CUSTOM DATE'}: </strong>{formatDate(invoice.customDate)}</p>
           )}
           <p><strong>NO OF EVENTS: </strong>{invoice.noOfEvents}</p>
         </div>
@@ -189,6 +203,21 @@ const Quote = () => {
           ))}
         </ul>
       </div>
+
+      {/* Complementary */}
+      {invoice.complementary && invoice.complementary.length > 0 && (
+        <div className="px-12 mb-4">
+          <strong>Complementary: </strong>
+          <ul className="list-disc ml-8 mt-2">
+            {invoice.complementary.map((complementaryItem, index) => (
+              <li key={index}>
+                {complementaryItem.complementaryName}
+                {complementaryItem.unit && `: ${complementaryItem.unit}`}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
 
       {/* Remarks */}
       {invoice.remarks && (

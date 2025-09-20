@@ -15,6 +15,7 @@ import companyInfo from '../data/companyInfo.json';
 import eventTypes from '../data/eventTypes.json';
 import services from '../data/services.json';
 import deliverables from '../data/deliverables.json';
+import complementary from '../data/complementary.json';
 import unitOptions from '../data/unitOptions.json';
 
 console.log('Billing component is being imported');
@@ -34,6 +35,11 @@ interface Deliverable {
   unit: string;
 }
 
+interface Complementary {
+  complementaryName: string;
+  unit: string;
+}
+
 interface Invoice {
   invoiceNumber: string;
   customer: {
@@ -42,14 +48,17 @@ interface Invoice {
   address: string;
   phonenumber: string;
   noOfEvents: string;
-  eventDate: string;
-  customDateName: string;
-  customDate: string;
+  engagementDate: string;
+  seerDate: string;
   weddingDate: string;
   receptionDate: string;
+  customDate: string;
+  eventDate: string;
+  customDateName: string;
   remarks: string;
   events: Event[];
   deliverables: Deliverable[];
+  complementary: Complementary[];
   total: string;
   advance: string;
 }
@@ -72,14 +81,17 @@ const Billing = () => {
     address: '',
     phonenumber: '',
     noOfEvents: '',
-    eventDate: '',
-    customDateName: '',
-    customDate: '',
+    engagementDate: '',
+    seerDate: '',
     weddingDate: '',
     receptionDate: '',
+    customDate: '',
+    eventDate: '',
+    customDateName: '',
     remarks: '',
     events: [{ eventName: '', services: [] }],
     deliverables: [],
+    complementary: [],
     total: '',
     advance: '',
   });
@@ -146,11 +158,13 @@ const Billing = () => {
         'address': 'address',
         'phone_no': 'phonenumber',
         'event_count': 'noOfEvents',
-        'event_date': 'eventDate',
-        'custom_date_name': 'customDateName',
-        'custom_date': 'customDate',
+        'engagement_date': 'engagementDate',
+        'seer_date': 'seerDate',
         'wedding_date': 'weddingDate',
         'reception_date': 'receptionDate',
+        'custom_date': 'customDate',
+        'event_date': 'eventDate',
+        'custom_date_name': 'customDateName',
         'remarks': 'remarks',
         'total_amount': 'total',
         'advance_amount': 'advance'
@@ -332,6 +346,59 @@ const Billing = () => {
     }
   };
 
+  // Handle complementary selection
+  const handleComplementaryChange = (complementaryId: string, checked: boolean, unit: string = '') => {
+    const complementaryObj = complementary.find(c => c.id === complementaryId);
+    
+    if (!complementaryObj) return;
+    
+    if (checked) {
+      // Add complementary
+      setInvoice(prev => ({
+        ...prev,
+        complementary: [
+          ...prev.complementary,
+          {
+            complementaryName: complementaryObj.name,
+            unit: unit
+          }
+        ]
+      }));
+    } else {
+      // Remove complementary
+      setInvoice(prev => ({
+        ...prev,
+        complementary: prev.complementary.filter(
+          c => c.complementaryName !== complementaryObj.name
+        )
+      }));
+    }
+  };
+
+  // Handle complementary unit change
+  const handleComplementaryUnitChange = (complementaryId: string, unit: string) => {
+    const complementaryObj = complementary.find(c => c.id === complementaryId);
+    
+    if (!complementaryObj) return;
+    
+    const updatedComplementary = [...invoice.complementary];
+    const complementaryIndex = updatedComplementary.findIndex(
+      c => c.complementaryName === complementaryObj.name
+    );
+    
+    if (complementaryIndex !== -1) {
+      updatedComplementary[complementaryIndex].unit = unit;
+      
+      setInvoice(prev => ({
+        ...prev,
+        complementary: updatedComplementary
+      }));
+    } else {
+      // If complementary wasn't checked yet, check it and add the unit
+      handleComplementaryChange(complementaryId, true, unit);
+    }
+  };
+
   // Add new event row
   const addEventRow = () => {
     setInvoice(prev => ({
@@ -460,30 +527,21 @@ const Billing = () => {
               </div>
               
               <div className="col-span-1">
-                <Label htmlFor="custom_date_name">Custom Date Name:</Label>
+                <Label htmlFor="engagement_date">Engagement Date:</Label>
                 <Input 
-                  id="custom_date_name" 
-                  value={invoice.customDateName}
+                  id="engagement_date" 
+                  type="date" 
+                  value={invoice.engagementDate}
                   onChange={handleInputChange}
                 />
               </div>
               
               <div className="col-span-1">
-                <Label htmlFor="custom_date">Custom Date:</Label>
+                <Label htmlFor="seer_date">Seer Date:</Label>
                 <Input 
-                  id="custom_date" 
+                  id="seer_date" 
                   type="date" 
-                  value={invoice.customDate}
-                  onChange={handleInputChange}
-                />
-              </div>
-              
-              <div className="col-span-1">
-                <Label htmlFor="event_date">Event Date:</Label>
-                <Input 
-                  id="event_date" 
-                  type="date" 
-                  value={invoice.eventDate}
+                  value={invoice.seerDate}
                   onChange={handleInputChange}
                 />
               </div>
@@ -504,6 +562,35 @@ const Billing = () => {
                   id="reception_date" 
                   type="date" 
                   value={invoice.receptionDate}
+                  onChange={handleInputChange}
+                />
+              </div>
+              
+              <div className="col-span-1">
+                <Label htmlFor="event_date">Event Date:</Label>
+                <Input 
+                  id="event_date" 
+                  type="date" 
+                  value={invoice.eventDate}
+                  onChange={handleInputChange}
+                />
+              </div>
+              
+              <div className="col-span-1">
+                <Label htmlFor="custom_date_name">Custom Date Name:</Label>
+                <Input 
+                  id="custom_date_name" 
+                  value={invoice.customDateName}
+                  onChange={handleInputChange}
+                />
+              </div>
+              
+              <div className="col-span-1">
+                <Label htmlFor="custom_date">Custom Date:</Label>
+                <Input 
+                  id="custom_date" 
+                  type="date" 
+                  value={invoice.customDate}
                   onChange={handleInputChange}
                 />
               </div>
@@ -613,8 +700,8 @@ const Billing = () => {
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {deliverables.map((deliverable) => (
-                  <div key={deliverable.id} className="flex items-start space-x-2">
-                    <div className="flex items-center h-10 space-x-2">
+                  <div key={deliverable.id} className="flex flex-col sm:flex-row sm:items-center gap-3 p-3 bg-gray-50 rounded-md">
+                    <div className="flex items-center space-x-2 flex-1">
                       <Checkbox 
                         id={deliverable.id}
                         checked={invoice.deliverables.some(d => d.deliverableName === deliverable.name)}
@@ -622,12 +709,14 @@ const Billing = () => {
                           handleDeliverableChange(deliverable.id, checked === true)
                         }
                       />
-                      <Label htmlFor={deliverable.id}>{deliverable.name}</Label>
+                      <Label htmlFor={deliverable.id} className="text-sm leading-tight">
+                        {deliverable.name}
+                      </Label>
                     </div>
-                    <div className="flex-1">
+                    <div className="w-full sm:w-48">
                       <select
                         id={`${deliverable.id}_unit`}
-                        className="w-full p-2 border rounded-md"
+                        className="w-full p-2 border rounded-md text-sm"
                         value={invoice.deliverables.find(d => d.deliverableName === deliverable.name)?.unit || ''}
                         onChange={(e) => handleDeliverableUnitChange(deliverable.id, e.target.value)}
                         disabled={!invoice.deliverables.some(d => d.deliverableName === deliverable.name)}
@@ -641,7 +730,7 @@ const Billing = () => {
                   </div>
                 ))}
                 
-                <div className="col-span-1 md:col-span-2">
+                <div className="col-span-1 md:col-span-2 mt-4">
                   <Label htmlFor="custom_deliverable">Custom Deliverable:</Label>
                   <Input 
                     id="custom_deliverable" 
@@ -651,6 +740,43 @@ const Billing = () => {
                     onBlur={handleCustomDeliverableBlur}
                   />
                 </div>
+              </div>
+            </div>
+            
+            <div className="border rounded-md p-4 mb-6">
+              <h3 className="font-semibold text-lg mb-4">Complementary</h3>
+              
+              <div className="space-y-4">
+                {complementary.map((complementaryItem) => (
+                  <div key={complementaryItem.id} className="flex flex-col sm:flex-row sm:items-center gap-3 p-3 bg-gray-50 rounded-md">
+                    <div className="flex items-center space-x-2 flex-1">
+                      <Checkbox 
+                        id={complementaryItem.id}
+                        checked={invoice.complementary.some(c => c.complementaryName === complementaryItem.name)}
+                        onCheckedChange={(checked) => 
+                          handleComplementaryChange(complementaryItem.id, checked === true)
+                        }
+                      />
+                      <Label htmlFor={complementaryItem.id} className="text-sm leading-tight">
+                        {complementaryItem.name}
+                      </Label>
+                    </div>
+                    <div className="w-full sm:w-48">
+                      <select
+                        id={`${complementaryItem.id}_unit`}
+                        className="w-full p-2 border rounded-md text-sm"
+                        value={invoice.complementary.find(c => c.complementaryName === complementaryItem.name)?.unit || ''}
+                        onChange={(e) => handleComplementaryUnitChange(complementaryItem.id, e.target.value)}
+                        disabled={!invoice.complementary.some(c => c.complementaryName === complementaryItem.name)}
+                      >
+                        <option value="">Select Unit</option>
+                        {unitOptions.map((unit, i) => (
+                          <option key={i} value={unit}>{unit}</option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
             

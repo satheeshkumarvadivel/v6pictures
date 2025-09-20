@@ -7,12 +7,19 @@ A modern React-based version of the V6Pictures billing and invoice system. This 
 - Modern UI with responsive design
 - Billing form for creating invoices
 - Print-friendly invoice page
+- Quote generation functionality
 - Static site generation for easy deployment
+- Docker support for containerized deployment
 
 ## Prerequisites
 
+### For Local Development
 - Node.js (v18 or higher)
 - npm or yarn
+
+### For Docker Deployment
+- Docker
+- Docker Compose
 
 ## Installation
 
@@ -57,7 +64,60 @@ To preview the production build locally:
 npm run serve
 ```
 
-## Deployment
+## Docker Deployment
+
+### Quick Start with Docker Compose
+
+1. Build and run the application using Docker Compose:
+
+```bash
+docker-compose up --build
+```
+
+The application will be available at http://localhost:3000
+
+2. To run in detached mode:
+
+```bash
+docker-compose up -d --build
+```
+
+3. To stop the application:
+
+```bash
+docker-compose down
+```
+
+### Manual Docker Commands
+
+1. Build the Docker image:
+
+```bash
+docker build -t v6pictures-react .
+```
+
+2. Run the container:
+
+```bash
+docker run -d -p 3000:80 --name v6pictures-app v6pictures-react
+```
+
+3. Stop and remove the container:
+
+```bash
+docker stop v6pictures-app
+docker rm v6pictures-app
+```
+
+### Docker Configuration
+
+- **Port**: The application runs on port 80 inside the container and is exposed on port 3000 on the host
+- **Network**: Uses a custom bridge network `v6pictures-network`
+- **Health Check**: Includes health check endpoint at `/health`
+- **Security**: Runs as non-root user for enhanced security
+- **Optimization**: Multi-stage build with nginx for production serving
+
+## Traditional Deployment
 
 The built files in the `dist` directory can be deployed to any static web server, such as Nginx, Apache, or services like Netlify, Vercel, or GitHub Pages.
 
