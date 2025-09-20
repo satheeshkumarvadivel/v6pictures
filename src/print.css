@@ -1,0 +1,71 @@
+@media print {
+  /* Hide navigation and print button when printing */
+  nav, 
+  button.print-button,
+  footer {
+    display: none !important;
+  }
+
+  /* Ensure the print layout takes full page */
+  body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background-color: white;
+  }
+
+  /* Reset page margins */
+  @page {
+    margin: 0;
+  }
+
+  /* Make sure text is black on white for better printing */
+  .print-container {
+    color: black !important;
+    background-color: white !important;
+  }
+
+  /* Ensure tables print properly */
+  table {
+    page-break-inside: auto;
+  }
+  
+  tr {
+    page-break-inside: avoid;
+    page-break-after: auto;
+  }
+
+  /* Ensure proper page breaks */
+  .page-break {
+    page-break-before: always;
+  }
+
+  /* Prevent text wrapping in date columns */
+  .whitespace-nowrap {
+    white-space: nowrap !important;
+  }
+
+  /* Ensure minimum width for date columns in print */
+  .invoice-date-column {
+    min-width: 280px !important;
+    white-space: nowrap !important;
+  }
+
+  /* Force flex row layout for invoice header in print */
+  .invoice-header-container {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: flex-start !important;
+  }
+
+  .invoice-left-column {
+    flex-shrink: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+  .invoice-right-column {
+    flex-shrink: 0 !important;
+    margin-bottom: 0 !important;
+  }
+}

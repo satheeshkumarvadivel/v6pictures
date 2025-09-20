@@ -1,0 +1,42 @@
+[
+  {
+    "id": "twenty_sheet",
+    "name": "Premium Album 20 Sheet"
+  },
+  {
+    "id": "twenty_five_sheet",
+    "name": "Premium Album 25 Sheet"
+  },
+  {
+    "id": "thirty_sheet",
+    "name": "Premium Album 30 Sheet"
+  },
+  {
+    "id": "forty_sheet",
+    "name": "Premium Album 40 Sheet"
+  },
+  {
+    "id": "fifty_sheet",
+    "name": "Premium Album 50 Sheet"
+  },
+  {
+    "id": "frames",
+    "name": "Frames"
+  },
+  {
+    "id": "magazine",
+    "name": "Magazine for Outdoor Shoot"
+  },
+  {
+    "id": "cinematic",
+    "name": "Cinematic Highlights"
+  },
+  {
+    "id": "traditional_video_out_4k",
+    "name": "Traditional Video Output: 4K"
+  },
+  {
+    "id": "traditional_video_out_hd",
+    "name": "Traditional Video Output: Full HD"
+  }
+]

@@ -1,0 +1,42 @@
+[
+  {
+    "id": "traditional_photo",
+    "name": "Traditional Photography"
+  },
+  {
+    "id": "traditional_video_4k",
+    "name": "Traditional Videography 4K"
+  },
+  {
+    "id": "traditional_video_hd",
+    "name": "Traditional Videography Full HD"
+  },
+  {
+    "id": "candid_photo",
+    "name": "Candid Photography"
+  },
+  {
+    "id": "candid_video_4k",
+    "name": "Candid Videography 4K"
+  },
+  {
+    "id": "candid_video_hd",
+    "name": "Candid Videography Full HD"
+  },
+  {
+    "id": "drone",
+    "name": "Drone"
+  },
+  {
+    "id": "led_wall_6",
+    "name": "LED Wall (6*8)"
+  },
+  {
+    "id": "led_wall_12",
+    "name": "LED Wall (12*8)"
+  },
+  {
+    "id": "all",
+    "name": "All"
+  }
+]
