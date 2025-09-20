@@ -36,6 +36,30 @@
     "name": "LED Wall (12*8)"
   },
   {
+    "id": "fpv_drone",
+    "name": "Fpv Drone"
+  },
+  {
+    "id": "selfie_stand_360",
+    "name": "360' selfie stand"
+  },
+  {
+    "id": "instant_photo_booth",
+    "name": "Instant Photo booth (4hrs)"
+  },
+  {
+    "id": "wedding_guest_live_photo_sharing",
+    "name": "Wedding guest Live photo sharing instantly"
+  },
+  {
+    "id": "live_mixing_unit",
+    "name": "Live mixing unit for led wall"
+  },
+  {
+    "id": "youtube_live_streaming",
+    "name": "YouTube live streaming"
+  },
+  {
     "id": "all",
     "name": "All"
   }
