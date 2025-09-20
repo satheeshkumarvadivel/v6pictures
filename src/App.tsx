@@ -3,6 +3,7 @@ import Layout from './components/layout/Layout';
 import Home from './pages/Home';
 import Billing from './pages/Billing';
 import Print from './pages/Print';
+import Quote from './pages/Quote';
 
 console.log('App component is being imported');
 
@@ -17,6 +18,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/billing" element={<Billing />} />
             <Route path="/print" element={<Print />} />
+            <Route path="/quote" element={<Quote />} />
             <Route path="/invoice" element={<Billing />} /> {/* Redirect to billing for now */}
             <Route path="/logout" element={<Home />} /> {/* Redirect to home for now */}
           </Routes>

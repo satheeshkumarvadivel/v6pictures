@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
   Card, 
@@ -60,7 +60,11 @@ const Billing = () => {
   const [, setEventCount] = useState(1);
   // Separate state for custom deliverable input to prevent character-by-character updates
   const [customDeliverableInput, setCustomDeliverableInput] = useState('');
-  const [invoice, setInvoice] = useState<Invoice>({
+  // Flag to prevent saving during initial load
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
+  
+  // Initialize invoice state with default values
+  const getInitialInvoiceState = (): Invoice => ({
     invoiceNumber: '',
     customer: {
       customerName: '',
@@ -79,6 +83,41 @@ const Billing = () => {
     total: '',
     advance: '',
   });
+  
+  const [invoice, setInvoice] = useState<Invoice>(getInitialInvoiceState());
+
+  // Load saved billing data on component mount
+  useEffect(() => {
+    const savedBillingData = sessionStorage.getItem('billing_form_data');
+    if (savedBillingData) {
+      try {
+        const parsedData = JSON.parse(savedBillingData);
+        setInvoice(parsedData.invoice);
+        setCustomDeliverableInput(parsedData.customDeliverableInput || '');
+        setEventCount(parsedData.invoice.events.length);
+        console.log('Loaded billing data:', parsedData); // Debug log
+      } catch (error) {
+        console.error('Error loading saved billing data:', error);
+        // If there's an error, clear the corrupted data
+        sessionStorage.removeItem('billing_form_data');
+      }
+    }
+    // Set flag to allow saving after initial load
+    setIsInitialLoad(false);
+  }, []);
+
+  // Save billing data to sessionStorage whenever invoice or customDeliverableInput changes
+  useEffect(() => {
+    // Don't save during initial load to prevent overwriting loaded data
+    if (!isInitialLoad) {
+      const billingData = {
+        invoice,
+        customDeliverableInput
+      };
+      sessionStorage.setItem('billing_form_data', JSON.stringify(billingData));
+      console.log('Saved billing data:', billingData); // Debug log
+    }
+  }, [invoice, customDeliverableInput, isInitialLoad]);
 
   // Format today's date
   const formatDate = () => {
@@ -318,7 +357,7 @@ const Billing = () => {
     setEventCount(prev => prev - 1);
   };
 
-  // Handle form submission
+  // Handle form submission for invoice
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
@@ -327,6 +366,31 @@ const Billing = () => {
     
     // Navigate to print page
     navigate('/print');
+  };
+
+  // Handle quote creation
+  const handleCreateQuote = (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    // Save invoice data to session storage (same data structure for quote)
+    sessionStorage.setItem('current_invoice', JSON.stringify(invoice));
+    
+    // Navigate to quote page
+    navigate('/quote');
+  };
+
+  // Clear form data
+  const handleClearForm = () => {
+    const confirmed = window.confirm('Are you sure you want to clear all form data? This action cannot be undone.');
+    if (confirmed) {
+      setInvoice(getInitialInvoiceState());
+      setCustomDeliverableInput('');
+      setEventCount(1);
+      sessionStorage.removeItem('billing_form_data');
+      // Reset the initial load flag to prevent immediate save
+      setIsInitialLoad(true);
+      setTimeout(() => setIsInitialLoad(false), 100);
+    }
   };
 
   return (
@@ -619,10 +683,26 @@ const Billing = () => {
               </div>
             </div>
             
-            <div className="flex justify-end">
-              <Button type="submit" className="bg-green-500 hover:bg-green-600">
-                Print
+            <div className="flex justify-between">
+              <Button 
+                type="button" 
+                onClick={handleClearForm}
+                className="bg-red-500 hover:bg-red-600"
+              >
+                Clear Form
               </Button>
+              <div className="flex space-x-4">
+                <Button 
+                  type="button" 
+                  onClick={handleCreateQuote}
+                  className="bg-blue-500 hover:bg-blue-600"
+                >
+                  Create Quote
+                </Button>
+                <Button type="submit" className="bg-green-500 hover:bg-green-600">
+                  Print
+                </Button>
+              </div>
             </div>
           </form>
         </CardContent>
