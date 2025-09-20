@@ -12,12 +12,12 @@ const Layout = ({ children }: LayoutProps) => {
   
   try {
     return (
-      <div className="min-h-screen flex flex-col">
+      <div className="min-h-screen flex flex-col bg-gray-50">
         <Navbar />
-        <main className="flex-grow container mx-auto px-4 py-6">
+        <main className="flex-grow container mx-auto px-6 py-8">
           {children}
         </main>
-        <footer className="bg-gray-100 py-4 text-center text-sm text-gray-600">
+        <footer className="bg-white border-t border-gray-200 py-6 text-center text-sm text-gray-600">
           <p>© {new Date().getFullYear()} V6Pictures. All rights reserved.</p>
         </footer>
       </div>

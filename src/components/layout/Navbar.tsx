@@ -14,22 +14,36 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-primary text-primary-foreground">
-      <div className="container mx-auto px-4 py-2">
+    <nav className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
+      <div className="container mx-auto px-6 py-4">
         <div className="flex justify-between items-center">
-          <Link to="/" className="font-bold text-xl">
-            {companyInfo.name.toUpperCase()}
+          <Link 
+            to="/" 
+            className="font-semibold text-2xl text-gray-800 hover:text-gray-600 transition-colors duration-200"
+          >
+            {companyInfo.name}
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-4">
-            <Link to="/billing" className="hover:underline">
+          <div className="hidden md:flex items-center space-x-8">
+            <Link 
+              to="/billing" 
+              className="text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200 relative group"
+            >
               Billing
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-200"></span>
             </Link>
-            <Link to="/invoice" className="hover:underline">
+            <Link 
+              to="/invoice" 
+              className="text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200 relative group"
+            >
               Invoice
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-200"></span>
             </Link>
-            <Link to="/logout" className="hover:underline">
+            <Link 
+              to="/logout" 
+              className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg font-medium transition-all duration-200 hover:shadow-sm"
+            >
               Logout
             </Link>
           </div>
@@ -40,37 +54,39 @@ const Navbar = () => {
               variant="ghost" 
               size="icon" 
               onClick={toggleMenu}
-              className="text-primary-foreground hover:bg-primary/90"
+              className="text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors duration-200"
             >
-              {isMenuOpen ? <X /> : <Menu />}
+              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </Button>
           </div>
         </div>
 
         {/* Mobile Navigation Menu */}
         {isMenuOpen && (
-          <div className="md:hidden py-2 space-y-2">
-            <Link 
-              to="/billing" 
-              className="block hover:bg-primary/90 px-4 py-2 rounded"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Billing
-            </Link>
-            <Link 
-              to="/invoice" 
-              className="block hover:bg-primary/90 px-4 py-2 rounded"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Invoice
-            </Link>
-            <Link 
-              to="/logout" 
-              className="block hover:bg-primary/90 px-4 py-2 rounded"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Logout
-            </Link>
+          <div className="md:hidden mt-4 py-4 border-t border-gray-200">
+            <div className="space-y-3">
+              <Link 
+                to="/billing" 
+                className="block text-gray-600 hover:text-gray-900 hover:bg-gray-50 px-4 py-3 rounded-lg font-medium transition-all duration-200"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Billing
+              </Link>
+              <Link 
+                to="/invoice" 
+                className="block text-gray-600 hover:text-gray-900 hover:bg-gray-50 px-4 py-3 rounded-lg font-medium transition-all duration-200"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Invoice
+              </Link>
+              <Link 
+                to="/logout" 
+                className="block bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-3 rounded-lg font-medium transition-all duration-200"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Logout
+              </Link>
+            </div>
           </div>
         )}
       </div>

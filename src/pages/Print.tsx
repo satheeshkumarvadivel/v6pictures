@@ -116,7 +116,7 @@ const Print = () => {
         </div>
         <div className="text-white text-center md:text-right mt-4 md:mt-0 md:mr-12">
           <p className="text-2xl font-bold">{companyInfo.name.toUpperCase()}</p>
-          <p className="text-lg">PHOTOGRAPHY | EVENTS</p>
+          <p className="text-lg">PREMIUM WEDDING PHOTOGRAPHY</p>
           <p className="text-lg">{companyInfo.location}</p>
         </div>
       </div>

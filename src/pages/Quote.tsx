@@ -107,16 +107,16 @@ const Quote = () => {
           <img src="/v6_logo.png" alt="V6Pictures Logo" className="w-32 h-32 object-contain" />
         </div>
         <div className="text-white text-center md:text-right mt-4 md:mt-0 md:mr-12">
-          <p className="text-2xl font-bold">{companyInfo.name.toUpperCase()}</p>
-          <p className="text-lg">PHOTOGRAPHY | EVENTS</p>
-          <p className="text-lg">{companyInfo.location}</p>
+          <p className="text-2xl font-bold font-display">{companyInfo.name.toUpperCase()}</p>
+          <p className="text-lg font-display">PREMIUM WEDDING PHOTOGRAPHY</p>
+          <p className="text-lg font-sans">{companyInfo.location}</p>
         </div>
       </div>
 
       {/* Quotation Title Section */}
       <div className="bg-gray-700 p-5 pb-8 flex flex-col md:flex-row justify-between items-start invoice-header-container">
         <div className="text-white ml-8 mb-4 md:mb-0 flex-shrink-0 invoice-left-column">
-          <h2 className="text-4xl font-bold text-amber-400 mb-4">QUOTATION</h2>
+          <h2 className="text-4xl font-bold text-amber-400 mb-4 font-display">QUOTATION</h2>
           <p><strong>QUOTE NO: </strong>{invoice.invoiceNumber}</p>
           <p><strong>QUOTE TO: </strong>{invoice.customer.customerName.toUpperCase()}</p>
           <p><strong>MOBILE NO: </strong>{invoice.phonenumber}</p>
@@ -145,16 +145,16 @@ const Quote = () => {
       <div className="p-12 pt-6">
         {invoice.events.map((event, eventIndex) => (
           <div key={eventIndex} className="mb-8">
-            <div className="text-center my-4">
+            <div className="text-center my-4 font-display">
               <strong>EVENT TYPE: </strong> {event.eventName.toUpperCase()}
             </div>
             
             <table className="w-full border-collapse mb-6">
               <thead>
-                <tr className="bg-amber-400">
-                  <th className="border p-2 text-left">S.NO</th>
-                  <th className="border p-2 text-left">SERVICE</th>
-                  <th className="border p-2 text-left">UNIT</th>
+                <tr className="bg-gray-500">
+                  <th className="border p-2 text-left font-display text-white">S.NO</th>
+                  <th className="border p-2 text-left font-display text-white">SERVICE</th>
+                  <th className="border p-2 text-left font-display text-white">UNIT</th>
                 </tr>
               </thead>
               <tbody>
@@ -171,7 +171,7 @@ const Quote = () => {
         ))}
 
         <div className="text-right mb-6">
-          <div className="inline-block bg-amber-400 p-2 font-bold">
+          <div className="inline-block bg-gray-500 p-2 font-bold text-white font-display">
             TOTAL PACKAGE: {invoice.total}
           </div>
         </div>
