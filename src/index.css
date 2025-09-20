@@ -56,3 +56,52 @@ body {
   color: hsl(var(--foreground));
   font-feature-settings: "rlig" 1, "calt" 1;
 }
+
+/* Custom improvements for better visual hierarchy */
+.form-section {
+  @apply border rounded-lg p-6 mb-8 bg-gray-50;
+}
+
+.form-section h3 {
+  @apply font-semibold text-xl mb-6 text-gray-800 border-b border-gray-200 pb-2;
+}
+
+.form-field {
+  @apply space-y-2;
+}
+
+.form-label {
+  @apply text-sm font-medium text-gray-700 block;
+}
+
+.form-input {
+  @apply mt-1 transition-all duration-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500;
+}
+
+.form-select {
+  @apply w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200;
+}
+
+/* Smooth transitions for interactive elements */
+.btn-primary {
+  @apply transition-all duration-200 hover:shadow-md hover:scale-105;
+}
+
+/* Card hover effects */
+.card-hover {
+  @apply transition-all duration-200 hover:shadow-lg hover:scale-[1.02];
+}
+
+/* Better focus states */
+input:focus,
+select:focus,
+textarea:focus {
+  @apply outline-none ring-2 ring-blue-500 ring-opacity-50;
+}
+
+/* Improved spacing for mobile */
+@media (max-width: 640px) {
+  .container {
+    @apply px-4;
+  }
+}

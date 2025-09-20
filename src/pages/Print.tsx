@@ -111,9 +111,9 @@ const Print = () => {
       <div className="hidden md:block print:block fixed top-20 right-4 print:hidden z-10">
         <button 
           onClick={handlePrint}
-          className="bg-primary text-white px-4 py-2 rounded-md hover:bg-primary/90"
+          className="bg-primary text-white px-6 py-3 rounded-lg hover:bg-primary/90 shadow-lg font-medium transition-all duration-200 hover:shadow-xl"
         >
-          Print
+          Print Invoice
         </button>
       </div>
 

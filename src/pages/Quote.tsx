@@ -103,14 +103,14 @@ const Quote = () => {
       <div className="hidden md:block print:block fixed top-20 right-4 print:hidden z-10">
         <button 
           onClick={handlePrint}
-          className="bg-primary text-white px-4 py-2 rounded-md hover:bg-primary/90"
+          className="bg-primary text-white px-6 py-3 rounded-lg hover:bg-primary/90 shadow-lg font-medium transition-all duration-200 hover:shadow-xl"
         >
-          Print
+          Print Quote
         </button>
       </div>
 
       {/* Header */}
-      <div className="bg-gray-700 p-5 flex flex-col md:flex-row justify-between items-center">
+      <div className="bg-gray-500 p-5 flex flex-col md:flex-row justify-between items-center">
         <div>
           <img src="/v6_logo.png" alt="V6Pictures Logo" className="w-32 h-32 object-contain" />
         </div>
@@ -122,7 +122,7 @@ const Quote = () => {
       </div>
 
       {/* Quotation Title Section */}
-      <div className="bg-gray-700 p-5 pb-8 flex flex-col md:flex-row justify-between items-start invoice-header-container">
+      <div className="bg-gray-500 p-5 pb-8 flex flex-col md:flex-row justify-between items-start invoice-header-container">
         <div className="text-white ml-8 mb-4 md:mb-0 flex-shrink-0 invoice-left-column">
           <h2 className="text-4xl font-bold text-amber-400 mb-4 font-display">QUOTATION</h2>
           <p><strong>QUOTE NO: </strong>{invoice.invoiceNumber}</p>

@@ -15,7 +15,7 @@ const Navbar = () => {
 
   return (
     <nav className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
-      <div className="container mx-auto px-6 py-4">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
         <div className="flex justify-between items-center">
           <Link 
             to="/" 
@@ -63,25 +63,25 @@ const Navbar = () => {
 
         {/* Mobile Navigation Menu */}
         {isMenuOpen && (
-          <div className="md:hidden mt-4 py-4 border-t border-gray-200">
-            <div className="space-y-3">
+          <div className="md:hidden mt-6 py-4 border-t border-gray-200 bg-gray-50 rounded-lg mx-2">
+            <div className="space-y-2 px-2">
               <Link 
                 to="/billing" 
-                className="block text-gray-600 hover:text-gray-900 hover:bg-gray-50 px-4 py-3 rounded-lg font-medium transition-all duration-200"
+                className="block text-gray-600 hover:text-gray-900 hover:bg-white px-4 py-3 rounded-lg font-medium transition-all duration-200 shadow-sm"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Billing
               </Link>
               <Link 
                 to="/invoice" 
-                className="block text-gray-600 hover:text-gray-900 hover:bg-gray-50 px-4 py-3 rounded-lg font-medium transition-all duration-200"
+                className="block text-gray-600 hover:text-gray-900 hover:bg-white px-4 py-3 rounded-lg font-medium transition-all duration-200 shadow-sm"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Invoice
               </Link>
               <Link 
                 to="/logout" 
-                className="block bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-3 rounded-lg font-medium transition-all duration-200"
+                className="block bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-3 rounded-lg font-medium transition-all duration-200 shadow-sm"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Logout

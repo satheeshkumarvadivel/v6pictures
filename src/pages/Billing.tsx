@@ -461,46 +461,48 @@ const Billing = () => {
   };
 
   return (
-    <div className="container mx-auto py-6">
-      <Card>
-        <CardHeader className="text-center">
-          <CardTitle className="text-2xl">{companyInfo.name}</CardTitle>
-          <CardDescription className="font-semibold">{companyInfo.tagline}</CardDescription>
-          <CardDescription>
+    <div className="max-w-6xl mx-auto py-6">
+      <Card className="shadow-lg">
+        <CardHeader className="text-center bg-gray-50 rounded-t-lg">
+          <CardTitle className="text-2xl sm:text-3xl mb-2">{companyInfo.name}</CardTitle>
+          <CardDescription className="font-semibold text-lg mb-2">{companyInfo.tagline}</CardDescription>
+          <CardDescription className="text-gray-600">
             {companyInfo.location} <br /> Ph: {companyInfo.phone}
           </CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className="p-6 sm:p-8">
           <form onSubmit={handleSubmit}>
-            <div className="flex justify-end mb-4">
-              <div className="text-right">
-                <p className="font-bold">
+            <div className="flex justify-end mb-6">
+              <div className="text-right bg-gray-50 px-4 py-2 rounded-lg">
+                <p className="font-bold text-gray-700">
                   Date: {formatDate()}
                 </p>
               </div>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-8">
               <div className="col-span-1">
-                <Label htmlFor="invoice_no">Invoice No:</Label>
+                <Label htmlFor="invoice_no" className="text-sm font-medium text-gray-700 mb-2 block">Invoice No:</Label>
                 <Input 
                   id="invoice_no" 
                   value={invoice.invoiceNumber}
                   onChange={handleInputChange}
+                  className="mt-1"
                 />
               </div>
               
               <div className="col-span-1 md:col-span-2">
-                <Label htmlFor="customer_name">Customer Name:</Label>
+                <Label htmlFor="customer_name" className="text-sm font-medium text-gray-700 mb-2 block">Customer Name:</Label>
                 <Input 
                   id="customer_name" 
                   value={invoice.customer.customerName}
                   onChange={handleInputChange}
+                  className="mt-1"
                 />
               </div>
               
               <div className="col-span-1">
-                <Label htmlFor="address">Address:</Label>
+                <Label htmlFor="address" className="text-sm font-medium text-gray-700 mb-2 block">Address:</Label>
                 <Input 
                   id="address" 
                   value={invoice.address}
@@ -509,100 +511,109 @@ const Billing = () => {
               </div>
               
               <div className="col-span-1">
-                <Label htmlFor="phone_no">Phone No:</Label>
+                <Label htmlFor="phone_no" className="text-sm font-medium text-gray-700 mb-2 block">Phone No:</Label>
                 <Input 
                   id="phone_no" 
                   value={invoice.phonenumber}
                   onChange={handleInputChange}
+                  className="mt-1"
                 />
               </div>
               
               <div className="col-span-1">
-                <Label htmlFor="event_count">No of Events:</Label>
+                <Label htmlFor="event_count" className="text-sm font-medium text-gray-700 mb-2 block">No of Events:</Label>
                 <Input 
                   id="event_count" 
                   value={invoice.noOfEvents}
                   onChange={handleInputChange}
+                  className="mt-1"
                 />
               </div>
               
               <div className="col-span-1">
-                <Label htmlFor="engagement_date">Engagement Date:</Label>
+                <Label htmlFor="engagement_date" className="text-sm font-medium text-gray-700 mb-2 block">Engagement Date:</Label>
                 <Input 
                   id="engagement_date" 
                   type="date" 
                   value={invoice.engagementDate}
                   onChange={handleInputChange}
+                  className="mt-1"
                 />
               </div>
               
               <div className="col-span-1">
-                <Label htmlFor="seer_date">Seer Date:</Label>
+                <Label htmlFor="seer_date" className="text-sm font-medium text-gray-700 mb-2 block">Seer Date:</Label>
                 <Input 
                   id="seer_date" 
                   type="date" 
                   value={invoice.seerDate}
                   onChange={handleInputChange}
+                  className="mt-1"
                 />
               </div>
               
               <div className="col-span-1">
-                <Label htmlFor="wedding_date">Wedding Date:</Label>
+                <Label htmlFor="wedding_date" className="text-sm font-medium text-gray-700 mb-2 block">Wedding Date:</Label>
                 <Input 
                   id="wedding_date" 
                   type="date" 
                   value={invoice.weddingDate}
                   onChange={handleInputChange}
+                  className="mt-1"
                 />
               </div>
               
               <div className="col-span-1">
-                <Label htmlFor="reception_date">Reception Date:</Label>
+                <Label htmlFor="reception_date" className="text-sm font-medium text-gray-700 mb-2 block">Reception Date:</Label>
                 <Input 
                   id="reception_date" 
                   type="date" 
                   value={invoice.receptionDate}
                   onChange={handleInputChange}
+                  className="mt-1"
                 />
               </div>
               
               <div className="col-span-1">
-                <Label htmlFor="event_date">Event Date:</Label>
+                <Label htmlFor="event_date" className="text-sm font-medium text-gray-700 mb-2 block">Event Date:</Label>
                 <Input 
                   id="event_date" 
                   type="date" 
                   value={invoice.eventDate}
                   onChange={handleInputChange}
+                  className="mt-1"
                 />
               </div>
               
               <div className="col-span-1">
-                <Label htmlFor="custom_date_name">Custom Date Name:</Label>
+                <Label htmlFor="custom_date_name" className="text-sm font-medium text-gray-700 mb-2 block">Custom Date Name:</Label>
                 <Input 
                   id="custom_date_name" 
                   value={invoice.customDateName}
                   onChange={handleInputChange}
+                  className="mt-1"
                 />
               </div>
               
               <div className="col-span-1">
-                <Label htmlFor="custom_date">Custom Date:</Label>
+                <Label htmlFor="custom_date" className="text-sm font-medium text-gray-700 mb-2 block">Custom Date:</Label>
                 <Input 
                   id="custom_date" 
                   type="date" 
                   value={invoice.customDate}
                   onChange={handleInputChange}
+                  className="mt-1"
                 />
               </div>
             </div>
             
-            <div className="border rounded-md p-4 mb-6">
-              <h3 className="font-semibold text-lg mb-4">Events & Services</h3>
+            <div className="border rounded-lg p-6 mb-8 bg-gray-50">
+              <h3 className="font-semibold text-xl mb-6 text-gray-800 border-b border-gray-200 pb-2">Events & Services</h3>
               
               {invoice.events.map((event, eventIndex) => (
-                <div key={eventIndex} className="mb-6 p-4 border rounded-md">
-                  <div className="flex items-center justify-between mb-4">
-                    <h4 className="font-semibold">Event {eventIndex + 1}</h4>
+                <div key={eventIndex} className="mb-6 p-6 border rounded-lg bg-white shadow-sm">
+                  <div className="flex items-center justify-between mb-6">
+                    <h4 className="font-semibold text-lg text-gray-800">Event {eventIndex + 1}</h4>
                     <div className="flex space-x-2">
                       {eventIndex === invoice.events.length - 1 && (
                         <Button 
@@ -627,11 +638,11 @@ const Billing = () => {
                     </div>
                   </div>
                   
-                  <div className="mb-4">
-                    <Label htmlFor={`event_type_${eventIndex}`}>Event Type</Label>
+                  <div className="mb-6">
+                    <Label htmlFor={`event_type_${eventIndex}`} className="text-sm font-medium text-gray-700 mb-2 block">Event Type</Label>
                     <select 
                       id={`event_type_${eventIndex}`}
-                      className="w-full p-2 border rounded-md"
+                      className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                       value={event.eventName}
                       onChange={(e) => handleEventTypeChange(eventIndex, e.target.value)}
                     >
@@ -642,11 +653,11 @@ const Billing = () => {
                     </select>
                   </div>
                   
-                  <div className="mb-4">
-                    <Label htmlFor={`service_select_${eventIndex}`}>Add Service</Label>
+                  <div className="mb-6">
+                    <Label htmlFor={`service_select_${eventIndex}`} className="text-sm font-medium text-gray-700 mb-2 block">Add Service</Label>
                     <select 
                       id={`service_select_${eventIndex}`}
-                      className="w-full p-2 border rounded-md"
+                      className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                       value=""
                       onChange={(e) => handleServiceChange(eventIndex, e.target.value)}
                     >
@@ -669,7 +680,7 @@ const Billing = () => {
                           </div>
                           <div className="flex-1">
                             <select
-                              className="w-full p-2 border rounded-md"
+                              className="w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                               value={service.unit}
                               onChange={(e) => handleServiceUnitChange(eventIndex, service.serviceName, e.target.value)}
                             >
@@ -695,12 +706,12 @@ const Billing = () => {
               ))}
             </div>
             
-            <div className="border rounded-md p-4 mb-6">
-              <h3 className="font-semibold text-lg mb-4">Deliverables</h3>
+            <div className="border rounded-lg p-6 mb-8 bg-gray-50">
+              <h3 className="font-semibold text-xl mb-6 text-gray-800 border-b border-gray-200 pb-2">Deliverables</h3>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
                 {deliverables.map((deliverable) => (
-                  <div key={deliverable.id} className="flex flex-col sm:flex-row sm:items-center gap-3 p-3 bg-gray-50 rounded-md">
+                  <div key={deliverable.id} className="flex flex-col sm:flex-row sm:items-center gap-3 p-4 bg-white rounded-lg border shadow-sm">
                     <div className="flex items-center space-x-2 flex-1">
                       <Checkbox 
                         id={deliverable.id}
@@ -716,7 +727,7 @@ const Billing = () => {
                     <div className="w-full sm:w-48">
                       <select
                         id={`${deliverable.id}_unit`}
-                        className="w-full p-2 border rounded-md text-sm"
+                        className="w-full p-2 border rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                         value={invoice.deliverables.find(d => d.deliverableName === deliverable.name)?.unit || ''}
                         onChange={(e) => handleDeliverableUnitChange(deliverable.id, e.target.value)}
                         disabled={!invoice.deliverables.some(d => d.deliverableName === deliverable.name)}
@@ -730,25 +741,26 @@ const Billing = () => {
                   </div>
                 ))}
                 
-                <div className="col-span-1 md:col-span-2 mt-4">
-                  <Label htmlFor="custom_deliverable">Custom Deliverable:</Label>
+                <div className="col-span-1 lg:col-span-2 mt-6">
+                  <Label htmlFor="custom_deliverable" className="text-sm font-medium text-gray-700 mb-2 block">Custom Deliverable:</Label>
                   <Input 
                     id="custom_deliverable" 
                     placeholder="Enter custom deliverable"
                     value={customDeliverableInput}
                     onChange={(e) => handleCustomDeliverableChange(e.target.value)}
                     onBlur={handleCustomDeliverableBlur}
+                    className="mt-1"
                   />
                 </div>
               </div>
             </div>
             
-            <div className="border rounded-md p-4 mb-6">
-              <h3 className="font-semibold text-lg mb-4">Complementary</h3>
+            <div className="border rounded-lg p-6 mb-8 bg-gray-50">
+              <h3 className="font-semibold text-xl mb-6 text-gray-800 border-b border-gray-200 pb-2">Complementary</h3>
               
-              <div className="space-y-4">
+              <div className="space-y-4 sm:space-y-6">
                 {complementary.map((complementaryItem) => (
-                  <div key={complementaryItem.id} className="flex flex-col sm:flex-row sm:items-center gap-3 p-3 bg-gray-50 rounded-md">
+                  <div key={complementaryItem.id} className="flex flex-col sm:flex-row sm:items-center gap-3 p-4 bg-white rounded-lg border shadow-sm">
                     <div className="flex items-center space-x-2 flex-1">
                       <Checkbox 
                         id={complementaryItem.id}
@@ -764,7 +776,7 @@ const Billing = () => {
                     <div className="w-full sm:w-48">
                       <select
                         id={`${complementaryItem.id}_unit`}
-                        className="w-full p-2 border rounded-md text-sm"
+                        className="w-full p-2 border rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                         value={invoice.complementary.find(c => c.complementaryName === complementaryItem.name)?.unit || ''}
                         onChange={(e) => handleComplementaryUnitChange(complementaryItem.id, e.target.value)}
                         disabled={!invoice.complementary.some(c => c.complementaryName === complementaryItem.name)}
@@ -780,52 +792,55 @@ const Billing = () => {
               </div>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-8">
               <div className="col-span-1 md:col-span-2">
-                <Label htmlFor="remarks">Remarks:</Label>
+                <Label htmlFor="remarks" className="text-sm font-medium text-gray-700 mb-2 block">Remarks:</Label>
                 <Input 
                   id="remarks" 
                   value={invoice.remarks}
                   onChange={handleInputChange}
+                  className="mt-1"
                 />
               </div>
               
               <div className="col-span-1">
-                <Label htmlFor="total_amount">Total Amount:</Label>
+                <Label htmlFor="total_amount" className="text-sm font-medium text-gray-700 mb-2 block">Total Amount:</Label>
                 <Input 
                   id="total_amount" 
                   value={invoice.total}
                   onChange={handleInputChange}
+                  className="mt-1"
                 />
               </div>
               
               <div className="col-span-1">
-                <Label htmlFor="advance_amount">Advance Amount:</Label>
+                <Label htmlFor="advance_amount" className="text-sm font-medium text-gray-700 mb-2 block">Advance Amount:</Label>
                 <Input 
                   id="advance_amount" 
                   value={invoice.advance}
                   onChange={handleInputChange}
+                  className="mt-1"
                 />
               </div>
             </div>
             
-            <div className="flex justify-between">
+            <div className="flex flex-col sm:flex-row justify-between items-center gap-4 pt-6 border-t border-gray-200">
               <Button 
                 type="button" 
                 onClick={handleClearForm}
-                className="bg-red-500 hover:bg-red-600"
+                className="bg-red-500 hover:bg-red-600 w-full sm:w-auto order-2 sm:order-1"
               >
                 Clear Form
               </Button>
-              <div className="flex space-x-4">
+              <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 w-full sm:w-auto order-1 sm:order-2">
                 <Button 
                   type="button" 
                   onClick={handleCreateQuote}
-                  className="bg-blue-500 hover:bg-blue-600"
+                  className="bg-blue-500 hover:bg-blue-600 w-full sm:w-auto"
                 >
                   Create Quote
                 </Button>
-                <Button type="submit" className="bg-green-500 hover:bg-green-600">
+                <Button type="submit" className="bg-green-500 hover:bg-green-600 w-full sm:w-auto">
                   Print
                 </Button>
               </div>
