@@ -108,7 +108,7 @@ const Print = () => {
   return (
     <div ref={printRef} className="bg-white text-black">
       {/* Print Header */}
-      <div className="hidden md:block print:block fixed top-20 right-4 print:hidden z-10">
+      <div className="hidden md:block print:block fixed top-24 right-4 print:hidden z-10">
         <button 
           onClick={handlePrint}
           className="bg-primary text-white px-6 py-3 rounded-lg hover:bg-primary/90 shadow-lg font-medium transition-all duration-200 hover:shadow-xl"
@@ -118,48 +118,52 @@ const Print = () => {
       </div>
 
       {/* Header */}
-      <div className="bg-gray-700 p-5 flex flex-col md:flex-row justify-between items-center">
+      <div className="bg-gray-500 p-5 flex flex-col md:flex-row justify-between items-center">
         <div>
           <img src="/v6_logo.png" alt="V6Pictures Logo" className="w-32 h-32 object-contain" />
         </div>
         <div className="text-white text-center md:text-right mt-4 md:mt-0 md:mr-12">
-          <p className="text-2xl font-bold">{companyInfo.name.toUpperCase()}</p>
-          <p className="text-lg">PREMIUM WEDDING PHOTOGRAPHY</p>
-          <p className="text-lg">{companyInfo.location}</p>
+          <p className="text-2xl font-bold font-display">{companyInfo.name.toUpperCase()}</p>
+          <p className="text-lg font-display">PREMIUM WEDDING PHOTOGRAPHY</p>
+          <p className="text-lg font-sans">{companyInfo.location}</p>
         </div>
       </div>
 
       {/* Invoice Title Section */}
-      <div className="bg-gray-700 p-5 pb-8 flex flex-col md:flex-row justify-between items-start invoice-header-container">
+      <div className="bg-gray-500 p-5 pb-8 flex flex-col md:flex-row justify-between items-start invoice-header-container">
         <div className="text-white ml-8 mb-4 md:mb-0 flex-shrink-0 invoice-left-column">
-          <h2 className="text-4xl font-bold text-amber-400 mb-4">INVOICE</h2>
-          <p><strong>INVOICE NO: </strong>{invoice.invoiceNumber}</p>
-          <p><strong>INVOICE TO: </strong>{invoice.customer.customerName.toUpperCase()}</p>
-          <p><strong>MOBILE NO: </strong>{invoice.phonenumber}</p>
-          <p><strong>VENUE: </strong>{invoice.address.toUpperCase()}</p>
+          <h2 className="text-4xl font-bold text-amber-400 mb-6 font-display">INVOICE</h2>
+          <div className="space-y-1">
+            <p><span className="date-label">INVOICE NO</span><span className="date-value">{invoice.invoiceNumber}</span></p>
+            <p><span className="date-label">INVOICE DATE</span><span className="date-value">{getTodaysDate()}</span></p>
+            <p><span className="date-label">INVOICE TO</span><span className="date-value">{invoice.customer.customerName.toUpperCase()}</span></p>
+            <p><span className="date-label">MOBILE NO</span><span className="date-value">{invoice.phonenumber}</span></p>
+            <p><span className="date-label">VENUE</span><span className="date-value">{invoice.address.toUpperCase()}</span></p>
+          </div>
         </div>
 
         <div className="text-white mr-8 min-w-[280px] whitespace-nowrap invoice-date-column flex-shrink-0 invoice-right-column">
-          <p><strong>INVOICE DATE: </strong>{getTodaysDate()}</p>
-          {invoice.engagementDate && (
-            <p><strong>ENGAGEMENT DATE: </strong>{formatDate(invoice.engagementDate)}</p>
-          )}
-          {invoice.seerDate && (
-            <p><strong>SEER DATE: </strong>{formatDate(invoice.seerDate)}</p>
-          )}
-          {invoice.weddingDate && (
-            <p><strong>WEDDING DATE: </strong>{formatDate(invoice.weddingDate)}</p>
-          )}
-          {invoice.receptionDate && (
-            <p><strong>RECEPTION DATE: </strong>{formatDate(invoice.receptionDate)}</p>
-          )}
-          {invoice.eventDate && (
-            <p><strong>EVENT DATE: </strong>{formatDate(invoice.eventDate)}</p>
-          )}
-          {invoice.customDate && (
-            <p><strong>{invoice.customDateName || 'CUSTOM DATE'}: </strong>{formatDate(invoice.customDate)}</p>
-          )}
-          <p><strong>NO OF EVENTS: </strong>{invoice.noOfEvents}</p>
+          <div className="space-y-1">
+            {invoice.engagementDate && (
+              <p><span className="date-label">ENGAGEMENT DATE</span><span className="date-value">{formatDate(invoice.engagementDate)}</span></p>
+            )}
+            {invoice.seerDate && (
+              <p><span className="date-label">SEER DATE</span><span className="date-value">{formatDate(invoice.seerDate)}</span></p>
+            )}
+            {invoice.weddingDate && (
+              <p><span className="date-label">WEDDING DATE</span><span className="date-value">{formatDate(invoice.weddingDate)}</span></p>
+            )}
+            {invoice.receptionDate && (
+              <p><span className="date-label">RECEPTION DATE</span><span className="date-value">{formatDate(invoice.receptionDate)}</span></p>
+            )}
+            {invoice.eventDate && (
+              <p><span className="date-label">EVENT DATE</span><span className="date-value">{formatDate(invoice.eventDate)}</span></p>
+            )}
+            {invoice.customDate && (
+              <p><span className="date-label">{invoice.customDateName || 'Custom date'}</span><span className="date-value">{formatDate(invoice.customDate)}</span></p>
+            )}
+            <p><span className="date-label">NO OF EVENTS</span><span className="date-value">{invoice.noOfEvents}</span></p>
+          </div>
         </div>
       </div>
 
@@ -167,16 +171,16 @@ const Print = () => {
       <div className="p-12 pt-6">
         {invoice.events.map((event, eventIndex) => (
           <div key={eventIndex} className="mb-8">
-            <div className="text-center my-4">
+            <div className="text-center my-4 font-display">
               <strong>EVENT TYPE: </strong> {event.eventName.toUpperCase()}
             </div>
             
             <table className="w-full border-collapse mb-6">
               <thead>
-                <tr className="bg-amber-400">
-                  <th className="border p-2 text-left">S.NO</th>
-                  <th className="border p-2 text-left">SERVICE</th>
-                  <th className="border p-2 text-left">UNIT</th>
+                <tr className="bg-gray-500">
+                  <th className="border p-2 text-left font-display text-white">S.NO</th>
+                  <th className="border p-2 text-left font-display text-white">SERVICE</th>
+                  <th className="border p-2 text-left font-display text-white">UNIT</th>
                 </tr>
               </thead>
               <tbody>
@@ -193,7 +197,7 @@ const Print = () => {
         ))}
 
         <div className="text-right mb-6">
-          <div className="inline-block bg-amber-400 p-2 font-bold">
+          <div className="inline-block bg-gray-500 p-2 font-bold text-white font-display">
             TOTAL PACKAGE: {invoice.total}
           </div>
         </div>
@@ -240,13 +244,13 @@ const Print = () => {
         <p className="italic">Thank you for your business</p>
         
         <div className="absolute right-12 top-6">
-          <div className="bg-amber-400 p-2 mb-4 min-w-[215px]">
+          <div className="bg-gray-500 p-2 mb-4 min-w-[215px] text-white">
             <strong>ADVANCE PAID: </strong> {invoice.advance}
           </div>
           
           <hr className="w-[250px] my-2" />
           
-          <div className="bg-amber-400 p-2 min-w-[215px] mt-8">
+          <div className="bg-gray-500 p-2 min-w-[215px] mt-8 text-white">
             <strong>BALANCE: </strong> {balance}
           </div>
         </div>
@@ -263,7 +267,7 @@ const Print = () => {
       </div>
 
       {/* Footer */}
-      <div className="bg-gray-700 text-white p-4 text-center mt-12">
+      <div className="bg-gray-500 text-white p-4 text-center mt-12">
         <p>Call Us +91 {companyInfo.phone} | {companyInfo.instagram}</p>
       </div>
     </div>

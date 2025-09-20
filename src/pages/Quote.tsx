@@ -100,7 +100,7 @@ const Quote = () => {
   return (
     <div ref={printRef} className="bg-white text-black">
       {/* Print Header */}
-      <div className="hidden md:block print:block fixed top-20 right-4 print:hidden z-10">
+      <div className="hidden md:block print:block fixed top-24 right-4 print:hidden z-10">
         <button 
           onClick={handlePrint}
           className="bg-primary text-white px-6 py-3 rounded-lg hover:bg-primary/90 shadow-lg font-medium transition-all duration-200 hover:shadow-xl"
@@ -124,34 +124,38 @@ const Quote = () => {
       {/* Quotation Title Section */}
       <div className="bg-gray-500 p-5 pb-8 flex flex-col md:flex-row justify-between items-start invoice-header-container">
         <div className="text-white ml-8 mb-4 md:mb-0 flex-shrink-0 invoice-left-column">
-          <h2 className="text-4xl font-bold text-amber-400 mb-4 font-display">QUOTATION</h2>
-          <p><strong>QUOTE NO: </strong>{invoice.invoiceNumber}</p>
-          <p><strong>QUOTE TO: </strong>{invoice.customer.customerName.toUpperCase()}</p>
-          <p><strong>MOBILE NO: </strong>{invoice.phonenumber}</p>
-          <p><strong>VENUE: </strong>{invoice.address.toUpperCase()}</p>
+          <h2 className="text-4xl font-bold text-amber-400 mb-6 font-display">QUOTATION</h2>
+          <div className="space-y-1">
+            <p><span className="date-label">QUOTE NO</span><span className="date-value">{invoice.invoiceNumber}</span></p>
+            <p><span className="date-label">QUOTE DATE</span><span className="date-value">{getTodaysDate()}</span></p>
+            <p><span className="date-label">QUOTE TO</span><span className="date-value">{invoice.customer.customerName.toUpperCase()}</span></p>
+            <p><span className="date-label">MOBILE NO</span><span className="date-value">{invoice.phonenumber}</span></p>
+            <p><span className="date-label">VENUE</span><span className="date-value">{invoice.address.toUpperCase()}</span></p>
+          </div>
         </div>
 
         <div className="text-white mr-8 min-w-[280px] whitespace-nowrap invoice-date-column flex-shrink-0 invoice-right-column">
-          <p><strong>QUOTE DATE: </strong>{getTodaysDate()}</p>
-          {invoice.engagementDate && (
-            <p><strong>ENGAGEMENT DATE: </strong>{formatDate(invoice.engagementDate)}</p>
-          )}
-          {invoice.seerDate && (
-            <p><strong>SEER DATE: </strong>{formatDate(invoice.seerDate)}</p>
-          )}
-          {invoice.weddingDate && (
-            <p><strong>WEDDING DATE: </strong>{formatDate(invoice.weddingDate)}</p>
-          )}
-          {invoice.receptionDate && (
-            <p><strong>RECEPTION DATE: </strong>{formatDate(invoice.receptionDate)}</p>
-          )}
-          {invoice.eventDate && (
-            <p><strong>EVENT DATE: </strong>{formatDate(invoice.eventDate)}</p>
-          )}
-          {invoice.customDate && (
-            <p><strong>{invoice.customDateName || 'CUSTOM DATE'}: </strong>{formatDate(invoice.customDate)}</p>
-          )}
-          <p><strong>NO OF EVENTS: </strong>{invoice.noOfEvents}</p>
+          <div className="space-y-1">
+            {invoice.engagementDate && (
+              <p><span className="date-label">ENGAGEMENT DATE</span><span className="date-value">{formatDate(invoice.engagementDate)}</span></p>
+            )}
+            {invoice.seerDate && (
+              <p><span className="date-label">SEER DATE</span><span className="date-value">{formatDate(invoice.seerDate)}</span></p>
+            )}
+            {invoice.weddingDate && (
+              <p><span className="date-label">WEDDING DATE</span><span className="date-value">{formatDate(invoice.weddingDate)}</span></p>
+            )}
+            {invoice.receptionDate && (
+              <p><span className="date-label">RECEPTION DATE</span><span className="date-value">{formatDate(invoice.receptionDate)}</span></p>
+            )}
+            {invoice.eventDate && (
+              <p><span className="date-label">EVENT DATE</span><span className="date-value">{formatDate(invoice.eventDate)}</span></p>
+            )}
+            {invoice.customDate && (
+              <p><span className="date-label">{invoice.customDateName || 'Custom date'}</span><span className="date-value">{formatDate(invoice.customDate)}</span></p>
+            )}
+            <p><span className="date-label">NO OF EVENTS</span><span className="date-value">{invoice.noOfEvents}</span></p>
+          </div>
         </div>
       </div>
 
