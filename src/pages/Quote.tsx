@@ -128,9 +128,9 @@ const Quote = () => {
           <div className="space-y-1">
             <p><span className="date-label">QUOTE NO</span><span className="date-value">{invoice.invoiceNumber}</span></p>
             <p><span className="date-label">QUOTE DATE</span><span className="date-value">{getTodaysDate()}</span></p>
-            <p><span className="date-label">QUOTE TO</span><span className="date-value">{invoice.customer.customerName.toUpperCase()}</span></p>
+            <p><span className="date-label">COUPLE NAME</span><span className="date-value">{invoice.customer.customerName.toUpperCase()}</span></p>
             <p><span className="date-label">MOBILE NO</span><span className="date-value">{invoice.phonenumber}</span></p>
-            <p><span className="date-label">VENUE</span><span className="date-value">{invoice.address.toUpperCase()}</span></p>
+            <p><span className="date-label">EVENT LOCATION</span><span className="date-value">{invoice.address.toUpperCase()}</span></p>
           </div>
         </div>
 

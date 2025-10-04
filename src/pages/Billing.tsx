@@ -492,7 +492,7 @@ const Billing = () => {
               </div>
               
               <div className="col-span-1 md:col-span-2">
-                <Label htmlFor="customer_name" className="text-sm font-medium text-gray-700 mb-2 block">Customer Name:</Label>
+                <Label htmlFor="customer_name" className="text-sm font-medium text-gray-700 mb-2 block">Couple Name:</Label>
                 <Input 
                   id="customer_name" 
                   value={invoice.customer.customerName}
@@ -502,7 +502,7 @@ const Billing = () => {
               </div>
               
               <div className="col-span-1">
-                <Label htmlFor="address" className="text-sm font-medium text-gray-700 mb-2 block">Address:</Label>
+                <Label htmlFor="address" className="text-sm font-medium text-gray-700 mb-2 block">Event Location:</Label>
                 <Input 
                   id="address" 
                   value={invoice.address}
