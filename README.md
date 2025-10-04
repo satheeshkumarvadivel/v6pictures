@@ -116,6 +116,41 @@ docker rm v6pictures-app
 - **Health Check**: Includes health check endpoint at `/health`
 - **Security**: Runs as non-root user for enhanced security
 - **Optimization**: Multi-stage build with nginx for production serving
+- **AWS EC2 Compatibility**: Includes explicit entrypoint script for AWS EC2 deployment
+
+## Troubleshooting Docker Deployment
+
+### AWS EC2 Specific Issues
+
+#### Entrypoint Error
+
+If you encounter an error like `exec /docker-entrypoint.sh` when running the Docker image on AWS EC2:
+
+1. This is typically caused by permission issues or missing entrypoint script
+2. The Dockerfile now includes an explicit entrypoint script to resolve this issue
+3. If you still encounter issues, verify that the entrypoint script has proper execution permissions:
+
+```bash
+# Connect to your running container
+docker exec -it v6pictures-app sh
+
+# Check if the entrypoint script exists and has execution permissions
+ls -la /docker-entrypoint.sh
+
+# If needed, set proper permissions
+chmod +x /docker-entrypoint.sh
+```
+
+#### Platform Compatibility
+
+If you're building on a different architecture than your deployment target:
+
+1. Ensure you're building for the correct platform using the `--platform` flag
+2. For AWS EC2 (typically x86_64/amd64), build with:
+
+```bash
+docker build --platform linux/amd64 -t v6pictures-react .
+```
 
 ## Traditional Deployment
 
