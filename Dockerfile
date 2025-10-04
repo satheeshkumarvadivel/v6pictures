@@ -1,6 +1,8 @@
 # Multi-stage build for V6Pictures React App
 # Stage 1: Build the application
-FROM --platform=$BUILDPLATFORM node:18-alpine AS builder
+# Always build for EC2 (AMD64 architecture)
+
+FROM --platform=linux/amd64 node:18-alpine AS builder
 
 # Set working directory
 WORKDIR /app
@@ -18,7 +20,10 @@ COPY . .
 RUN npm run build
 
 # Stage 2: Serve the application with nginx
-FROM --platform=$TARGETPLATFORM nginx:alpine AS production
+FROM --platform=linux/amd64 nginx:alpine AS production
+
+# Print platform info for debugging
+RUN echo "Running on $(uname -m) architecture" # Should show x86_64
 
 # Install curl for health checks
 RUN apk add --no-cache curl
@@ -36,9 +41,11 @@ EXPOSE 80
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
   CMD curl -f http://localhost/ || exit 1
 
-# Create a simple entrypoint script
-RUN echo '#!/bin/sh\nnginx -g "daemon off;"' > /docker-entrypoint.sh && \
-    chmod +x /docker-entrypoint.sh
+# Copy and set up the entrypoint script
+COPY docker-entrypoint.sh /docker-entrypoint.sh
+RUN chmod +x /docker-entrypoint.sh && \
+    ls -la /docker-entrypoint.sh && \
+    cat /docker-entrypoint.sh
 
 # Set the entrypoint
 ENTRYPOINT ["/docker-entrypoint.sh"]

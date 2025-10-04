@@ -143,14 +143,27 @@ chmod +x /docker-entrypoint.sh
 
 #### Platform Compatibility
 
-If you're building on a different architecture than your deployment target:
+The Docker configuration is now hardcoded to always build for AWS EC2 (AMD64 architecture), even when building on different architectures like Apple Silicon Macs:
 
-1. Ensure you're building for the correct platform using the `--platform` flag
-2. For AWS EC2 (typically x86_64/amd64), build with:
+1. **Using Docker Compose (recommended)**:
+   ```bash
+   # Build and run (will always target AMD64)
+   docker-compose build --no-cache
+   docker-compose up -d
+   ```
 
-```bash
-docker build --platform linux/amd64 -t v6pictures-react .
-```
+2. **Using Docker directly**:
+   ```bash
+   # Will always build for AMD64 (standard EC2)
+   docker build -t v6pictures-react .
+   docker run -d -p 3000:80 v6pictures-react
+   ```
+
+3. **Note for ARM64 EC2 instances**:
+   The current configuration targets AMD64 architecture. If you need to deploy to ARM64 EC2 instances (AWS Graviton), you'll need to modify the Dockerfile to use `--platform=linux/arm64` instead.
+
+4. **Cross-Platform Building**:
+   When building on Apple Silicon Macs, Docker will automatically use QEMU to emulate AMD64 architecture, which may be slower than native building but ensures compatibility with standard EC2 instances.
 
 ## Traditional Deployment
 
